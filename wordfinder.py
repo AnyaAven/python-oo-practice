@@ -51,13 +51,12 @@ class SpecialWordFinder(WordFinder):
     """
 
     def get_words_from_file(self):
-        """gets random word from words,
-        filtering blank lines and lines starting with #
+        """ Filtering blank lines and lines starting with #
 
         Returns list of words
         """
 
         words = super().get_words_from_file()
-        filteredWords = [
+        filtered_words = [
             word for word in words if not (word == "" or word.startswith('#'))]
-        return filteredWords
+        return filtered_words
