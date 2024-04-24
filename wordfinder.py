@@ -9,7 +9,7 @@ class WordFinder:
 
         Prints confirmation message of the amount of words in file
         """
-        self.file_path = file_path  # NOTE: do we need to store this?
+        self.file_path = file_path
 
         self.words = self.get_words_from_file()
 
@@ -21,7 +21,6 @@ class WordFinder:
     def print_word_count(self):
         """Prints out confirmation message
 
-        Called on __init__
         Returns None
         """
         print(f"{len(self.words)} words read")
@@ -29,9 +28,8 @@ class WordFinder:
     def get_words_from_file(self):
         """ Open file and read each line and add to word list,
         closes files
-        Called on __init__
 
-        Returns None
+        Returns list of words
         """
         file = open(self.file_path)
 
@@ -42,31 +40,24 @@ class WordFinder:
 
     def get_random_word(self) -> str:
         """ Returns a random word from word list
-        Called on __init__
 
         Returns string
         """
         return choice(self.words)
 
-
-# FIXME: change update_words_from_file instead of get_random
 class SpecialWordFinder(WordFinder):
-    """Finds a random word from file, 
+    """Finds a random word from file,
     excluding blank lines and comments (#)
     """
 
     def get_words_from_file(self):
+        """gets random word from words,
+        filtering blank lines and lines starting with #
+
+        Returns list of words
+        """
+
         words = super().get_words_from_file()
         filteredWords = [
             word for word in words if not (word == "" or word.startswith('#'))]
         return filteredWords
-
-    # def get_random_word_exclusive(self):
-    #     """gets random word from words,
-    #     filtering blank lines and lines starting with #
-    #     """
-    #     getRand = choice(self.words)
-    #     while (getRand == "" or getRand.startswith('#')):
-    #         getRand = choice(self.words)
-
-    #     return getRand
